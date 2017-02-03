@@ -188,7 +188,9 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("关于作者")
-                        .setMessage("我有什么好了解的QAQ\n我的QQ：834337589\n开源地址：\nGitHub：还没有\n码云：还没有\n我的邮箱：算了我也知道写那么长你们是不看的了")
+                        .setMessage("我有什么好了解的QAQ\n我的QQ：" +getResources().getString(R.string.QQ)+
+                                "\n开源地址：\nGitHub：" +getResources().getString(R.string.github)+
+                                "\n码云："+getResources().getString(R.string.gitoschina)+"\n我的邮箱：" +getResources().getString(R.string.email))
                         .setPositiveButton("试一下",null)
                         .show();
             }

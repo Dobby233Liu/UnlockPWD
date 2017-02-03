@@ -15,7 +15,7 @@
         <!--这段代码用来配置appid-->
         <meta-data
             android:name="BUGLY_APPID"
-            android:value="9084fd8996"/>
+            android:value="这个是我的"/><!--请将这个值替换为自己的腾讯BuglyID即可-->
         <!--这段代码用来配置appid-->
         <!--这段代码用来配置activity-->
         <activity

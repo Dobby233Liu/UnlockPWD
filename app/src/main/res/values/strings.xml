@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">unlockPWD</string>
-    <string name="description">Test</string>
+    <string name="description"></string>
+    <string name="QQ">834337589</string>
+    <string name="gitoschina">https://git.oschina.net/lijialong1313/UnlockPWD</string>
+    <string name="github">还没有</string>
+    <string name="email">jialong_li@163.com</string>
 </resources>
