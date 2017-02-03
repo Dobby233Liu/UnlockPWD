@@ -5,4 +5,7 @@
     <string name="gitoschina">https://git.oschina.net/lijialong1313/UnlockPWD</string>
     <string name="github">https://github.com/lijialong1313/UnlockPWD</string>
     <string name="email">jialong_li@163.com</string>
+    <string name="DPM_disable">设备管理器:不建议</string>
+    <string name="DPM_on">设备管理器:已启用</string>
+    <string name="DPM_off">设备管理器:未启用</string>
 </resources>

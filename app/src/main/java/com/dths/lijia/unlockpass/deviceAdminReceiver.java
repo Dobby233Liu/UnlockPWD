@@ -36,6 +36,7 @@ public class deviceAdminReceiver extends DeviceAdminReceiver {
     public void onEnabled(Context context, Intent intent) {
         // TODO Auto-generated method stub
         showToast(context, "设备管理：可用");
+
     }
 
     @Override

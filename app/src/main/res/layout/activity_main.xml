@@ -10,13 +10,11 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.dths.lijia.unlockpass.MainActivity">
-
     <EditText
         android:id="@+id/edbox"
         android:layout_width="match_parent"
         android:inputType="number"
         android:layout_height="wrap_content" />
-
     <Button
         android:id="@+id/btn_mDPM"
         android:layout_width="match_parent"
@@ -27,12 +25,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="清除密码（root）"/>
-    <!--<Button
-        android:id="@+id/btn_cleanbyreboot"
+    <Button
+        android:id="@+id/btn_mDPMnow"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="#F00"
-        android:text="重启清除密码（root）"/>-->
+        android:textColor="#999999"
+        android:text="设备管理器：未启用"/>
     <Button
         android:id="@+id/btn_checkupdate"
         android:layout_width="match_parent"

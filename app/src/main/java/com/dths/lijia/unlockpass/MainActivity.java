@@ -1,6 +1,6 @@
 package com.dths.lijia.unlockpass;
 
-import android.app.Activity;
+
 import android.app.AlertDialog;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -16,6 +16,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import android.support.v4.app.NotificationCompat;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -28,9 +29,9 @@ import com.tencent.bugly.beta.Beta;
 import java.io.IOException;
 import java.util.concurrent.CountDownLatch;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
 
-    private Button btn_mDPM, btn_rootclean,btn_checkupdate,btn_reporterror,btn_about;
+    private Button btn_mDPM, btn_rootclean,btn_checkupdate,btn_reporterror,btn_about,btn_mDPMnow;
     private DevicePolicyManager mDPM;
     private ComponentName mDeviceAdminSample;
     private String password;
@@ -47,7 +48,10 @@ public class MainActivity extends Activity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+        btn_mDPMnow=(Button)findViewById(R.id.btn_mDPMnow);
         if (Build.VERSION.SDK_INT > 24) {
+            btn_mDPMnow.setText(getResources().getString(R.string.DPM_disable));
+            btn_mDPMnow.setTextColor(0xFF999999);
             new AlertDialog.Builder(MainActivity.this).setTitle("系统提示")//设置对话框标题
                     .setMessage("检测到Android版本为7.0以上，需要root权限且只能清除密码！")//设置显示的内容
                     .setPositiveButton("给予权限", new DialogInterface.OnClickListener() {//添加确定按钮
@@ -70,6 +74,26 @@ public class MainActivity extends Activity {
             }).show();//在按键响应事件中显示此对话框
         }
         mDeviceAdminSample = new ComponentName(this, deviceAdminReceiver.class);
+        if(mDPM.isAdminActive(mDeviceAdminSample)){
+            btn_mDPMnow.setText(getResources().getString(R.string.DPM_on));
+            btn_mDPMnow.setTextColor(0xFF00FF00);
+        }else{
+            btn_mDPMnow.setText(getResources().getString(R.string.DPM_off));
+            btn_mDPMnow.setTextColor(0xFFFF0000);
+        }
+
+        btn_mDPMnow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mDPM.isAdminActive(mDeviceAdminSample)){
+                    mDPM.removeActiveAdmin(mDeviceAdminSample);
+                    btn_mDPMnow.setText(getResources().getString(R.string.DPM_off));
+                    btn_mDPMnow.setTextColor(0xFFFF0000);
+                }else{
+                    DPMChoice();
+                }
+            }
+        });
         btn_rootclean = (Button) findViewById(R.id.btn_rootclean);
         btn_rootclean.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,7 +257,9 @@ public class MainActivity extends Activity {
             intent.putExtra(DevicePolicyManager.EXTRA_DEVICE_ADMIN, mDeviceAdminSample);
             intent.putExtra(DevicePolicyManager.EXTRA_ADD_EXPLANATION,
                     "尝试申请设备管理员");
-            startActivity(intent);
+            //startActivity(intent);
+            startActivityForResult(intent,0);
+
         }
     }
     /*
@@ -257,5 +283,15 @@ public class MainActivity extends Activity {
                 //Notification.DEFAULT_ALL  Notification.DEFAULT_SOUND 添加声音 // requires VIBRATE permission
                 .setSmallIcon(R.mipmap.ic_launcher);//设置通知小ICON
         mNotificationManager.notify((int) System.currentTimeMillis(), mBuilder.build());
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data){
+        if(mDPM.isAdminActive(mDeviceAdminSample)){
+            btn_mDPMnow.setText(getResources().getString(R.string.DPM_on));
+            btn_mDPMnow.setTextColor(0xFF00FF00);
+        }else{
+            btn_mDPMnow.setText(getResources().getString(R.string.DPM_off));
+            btn_mDPMnow.setTextColor(0xFFFF0000);
+        }
     }
 }
